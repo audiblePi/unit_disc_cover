@@ -7,19 +7,21 @@
 #IncludeRegexTransform: 
 
 /Users/newowner/workspace/_computational_geometry/CGAL/unit_disc_cover/main.cpp
-CGAL/Simple_cartesian.h
--
 cassert
 -
 vector
 -
 algorithm
 -
+CGAL/Simple_cartesian.h
+-
 CGAL/point_generators_2.h
 -
 CGAL/algorithm.h
 -
 CGAL/random_selection.h
+-
+CGAL/squared_distance_2.h
 -
 nlohmann/json.hpp
 -
