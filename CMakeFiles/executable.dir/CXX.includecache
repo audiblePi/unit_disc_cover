@@ -23,6 +23,8 @@ CGAL/random_selection.h
 -
 CGAL/squared_distance_2.h
 -
+CGAL/Circle_2.h
+-
 nlohmann/json.hpp
 -
 fstream
