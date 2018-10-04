@@ -264,6 +264,30 @@ MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 //Path to a program.
 P4COMMAND:FILEPATH=P4COMMAND-NOTFOUND
 
+//The directory containing a CMake configuration file for Qt5Core.
+Qt5Core_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Core
+
+//The directory containing a CMake configuration file for Qt5Gui.
+Qt5Gui_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Gui
+
+//The directory containing a CMake configuration file for Qt5OpenGL.
+Qt5OpenGL_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5OpenGL
+
+//The directory containing a CMake configuration file for Qt5ScriptTools.
+Qt5ScriptTools_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5ScriptTools
+
+//The directory containing a CMake configuration file for Qt5Script.
+Qt5Script_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Script
+
+//The directory containing a CMake configuration file for Qt5Svg.
+Qt5Svg_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Svg
+
+//The directory containing a CMake configuration file for Qt5Widgets.
+Qt5Widgets_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Widgets
+
+//The directory containing a CMake configuration file for Qt5.
+Qt5_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5
+
 //Path to scp command, used by CTest for submitting results to
 // a Dart server
 SCPCOMMAND:FILEPATH=/usr/bin/scp
@@ -301,7 +325,7 @@ Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
 Boost_NO_BOOST_CMAKE:INTERNAL=TRUE
 //ADVANCED property for variable: CGAL_Boost_USE_STATIC_LIBS
 CGAL_Boost_USE_STATIC_LIBS-ADVANCED:INTERNAL=1
-CGAL_EXECUTABLE_TARGETS:INTERNAL=executable;executable;executable;executable;executable
+CGAL_EXECUTABLE_TARGETS:INTERNAL=executable;executable;executable;executable;executable;executable;executable;executable;executable
 //Result of TRY_COMPILE
 CGAL_test_cpp_version_COMPILE_RES:INTERNAL=TRUE
 //Result of TRY_RUN

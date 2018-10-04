@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/executable.dir/Centers.cpp.o"
   "CMakeFiles/executable.dir/main.cpp.o"
   "executable.pdb"
   "executable"

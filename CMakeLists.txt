@@ -7,7 +7,7 @@ project( executable )
 cmake_minimum_required(VERSION 2.8.11)
 
 # CGAL and its components
-find_package( CGAL QUIET COMPONENTS  )
+find_package( CGAL QUIET COMPONENTS Qt5 )
 
 if ( NOT CGAL_FOUND )
 
@@ -39,7 +39,7 @@ endif()
 # Creating entries for target: executable
 # ############################
 
-add_executable( executable  main.cpp )
+add_executable( executable  Centers.cpp main.cpp )
 
 add_to_cached_list( CGAL_EXECUTABLE_TARGETS executable )
 
