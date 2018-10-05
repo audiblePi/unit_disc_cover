@@ -42,14 +42,17 @@ class Centers{
             unitSize = unitSize;
         }
         
-        void generateRandomPoints(int);
+        void generateRandomPoints(int, int);
         void loadFromFile();
         void init();
-        void addUnitCircle(Point);
+        void addUnitDisc(Point);
         void setUnitSize(int);
         void showPoints();
         void showUnitDiscCenters();
         void findDiscCenters();
+        PointVector getPoints();
+        CircleVector getUnitDiscs();
+        int getUnitSize();
 };
 
 #endif

@@ -7,7 +7,7 @@ project( executable )
 cmake_minimum_required(VERSION 2.8.11)
 
 # CGAL and its components
-find_package( CGAL QUIET COMPONENTS Qt5 )
+find_package( CGAL QUIET COMPONENTS Qt5 Qt5Charts )
 
 if ( NOT CGAL_FOUND )
 

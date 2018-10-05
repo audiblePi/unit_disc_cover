@@ -264,6 +264,9 @@ MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 //Path to a program.
 P4COMMAND:FILEPATH=P4COMMAND-NOTFOUND
 
+//The directory containing a CMake configuration file for Qt5Charts.
+Qt5Charts_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Charts
+
 //The directory containing a CMake configuration file for Qt5Core.
 Qt5Core_DIR:PATH=/Users/newowner/anaconda3/lib/cmake/Qt5Core
 
@@ -325,7 +328,7 @@ Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
 Boost_NO_BOOST_CMAKE:INTERNAL=TRUE
 //ADVANCED property for variable: CGAL_Boost_USE_STATIC_LIBS
 CGAL_Boost_USE_STATIC_LIBS-ADVANCED:INTERNAL=1
-CGAL_EXECUTABLE_TARGETS:INTERNAL=executable;executable;executable;executable;executable;executable;executable;executable;executable
+CGAL_EXECUTABLE_TARGETS:INTERNAL=executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable;executable
 //Result of TRY_COMPILE
 CGAL_test_cpp_version_COMPILE_RES:INTERNAL=TRUE
 //Result of TRY_RUN

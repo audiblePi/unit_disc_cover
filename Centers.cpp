@@ -1,8 +1,8 @@
 #include <Centers.h>
 
-void Centers::generateRandomPoints(int num){
+void Centers::generateRandomPoints(int num, int graphSize){
     points.reserve(num);
-    Random_points_in_square_2<Point,Creator> g( 10.0);
+    Random_points_in_square_2<Point,Creator> g(graphSize);
     CGAL::cpp11::copy_n( g, num, std::back_inserter(points));
     cout << " Generated " << points.size() << " random points" << endl;
 }
@@ -19,10 +19,10 @@ void Centers::loadFromFile(){
 }
 
 void Centers::init(){
-    addUnitCircle(points[0]);
+    addUnitDisc(points[0]);
 }
 
-void Centers::addUnitCircle(Point center){
+void Centers::addUnitDisc(Point center){
     Circle unitDisc(center, unitSize, CGAL::COUNTERCLOCKWISE);
     unitDiscs.push_back(unitDisc);
 }
@@ -71,7 +71,19 @@ void Centers::findDiscCenters(){
 
         if (isNotCovered) {
             cout << " -- is not covered" << endl;
-            addUnitCircle(points[i]);
+            addUnitDisc(points[i]);
         }
     }
+}
+
+PointVector Centers::getPoints(){
+    return points;
+}
+
+CircleVector Centers::getUnitDiscs(){
+    return unitDiscs;
+}
+
+int Centers::getUnitSize(){
+    return unitSize;
 }
