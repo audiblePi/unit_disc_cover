@@ -32,6 +32,7 @@ class Centers{
     private:
         PointVector points;
         CircleVector unitDiscs;
+        CircleVector unitDiscBucket;
         int unitSize;
     
     public:
@@ -43,6 +44,7 @@ class Centers{
         }
         
         void generateRandomPoints(int, int);
+        void generateUnitDiscBucket(int);
         void loadFromFile();
         void init();
         void addUnitDisc(Point);
@@ -50,8 +52,10 @@ class Centers{
         void showPoints();
         void showUnitDiscCenters();
         void findDiscCenters();
+        void findDiscCentersGreedy();
         PointVector getPoints();
         CircleVector getUnitDiscs();
+        CircleVector getUnitDiscBucket();
         int getUnitSize();
 };
 

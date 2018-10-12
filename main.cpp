@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void showMenu(Centers* obj, int graphSize){
+int showMenu(Centers* obj, int graphSize){
     int menuChoice, sampleSize, unitSize;
 
     cout << endl;
@@ -34,37 +34,57 @@ void showMenu(Centers* obj, int graphSize){
             break;            
         case 3 : 
         default :
-            return;
+            return 0;
     }
 
     cout << endl << " Size of a unit? : ";
     cin >> unitSize;
     
     obj->setUnitSize(unitSize * unitSize);
+
+    cout << endl;
+    cout << " Choose " << endl;
+    cout << " 1. Brute Force " << endl;
+    cout << " 2. Greedy" << endl;
+    cout << " Enter your choice : ";
+    cin >> menuChoice;
+
+   return menuChoice;
 }
 
 int main(int argc, char **argv){
     double unitSize;
-    int graphSize = 25;
-    int pointScale = 10;
+    int graphSize = 10;
+    int pointScale = 30;
+    int pointSize = 5;
+    int which;
 
     QApplication app(argc, argv);
     QGraphicsScene scene;
     QGraphicsView* view = new QGraphicsView(&scene);
+    
     Centers obj;
     PointVector points;
     CircleVector unitDiscs;
+    //CircleVector unitDiscBucket;
 
-    showMenu(&obj, graphSize);
-    obj.init();
+    which = showMenu(&obj, graphSize);
+
+    if (which == 1){
+        obj.init();
+        obj.findDiscCenters();
+    } else if (which == 2) {
+        obj.findDiscCentersGreedy();
+    }
+
     //obj.showPoints();
-    obj.findDiscCenters();
-    obj.showUnitDiscCenters();
+    //obj.generateUnitDiscBucket(graphSize);
+    //obj.showUnitDiscCenters();
 
     unitSize = sqrt( (double) obj.getUnitSize() );
     points = obj.getPoints();
     unitDiscs = obj.getUnitDiscs();
-
+    //unitDiscBucket = obj.getUnitDiscBucket();
 
     
 
@@ -76,17 +96,6 @@ int main(int argc, char **argv){
     scene.setSceneRect(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale);
     scene.addRect(QRectF(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale));
     
-    //dot graph
-    // for(int i=-graphSize; i<=graphSize; i++) {
-    //     for(int j=-graphSize; j<=graphSize; j++) {
-    //         scene.addEllipse(QRectF(
-    //             (i * pointScale) - (0.5 * pointScale),
-    //             ((-j * pointScale) - (0.5 * pointScale)), 
-    //             pointScale, 
-    //             pointScale));
-    //     }
-    // }
-
     for(int i=-graphSize; i<=graphSize; i++) {
         scene.addLine(
             QLineF(-graphSize * pointScale, i * pointScale, graphSize * pointScale, i * pointScale),
@@ -101,14 +110,42 @@ int main(int argc, char **argv){
     scene.addLine(QLineF(-graphSize * pointScale, 0 * pointScale, graphSize * pointScale, 0 * pointScale));
     scene.addLine(QLineF(0 * pointScale, -graphSize * pointScale, 0 * pointScale, graphSize * pointScale));
 
+
+
+
+
+
+
+
+    //plot unitDiscBucket
+    // for(long unsigned int i=0; i<unitDiscBucket.size(); i++) {
+    //     scene.addEllipse(QRectF(
+    //         (unitDiscBucket[i].center().x() * pointScale) - (unitSize * pointScale),
+    //         ((-unitDiscBucket[i].center().y() * pointScale) - (unitSize * pointScale)), 
+    //         (unitSize * pointScale) * 2, 
+    //         (unitSize * pointScale) * 2));
+    // }
+
+    //plot unitDiscBucketCenters
+    // for(long unsigned int i=0; i<unitDiscBucket.size(); i++) {
+    //     scene.addEllipse(
+    //         QRectF(
+    //             (unitDiscBucket[i].center().x() * pointScale) - (pointSize * 0.5),
+    //             ((-unitDiscBucket[i].center().y() * pointScale) - (pointSize * 0.5)), 
+    //             pointSize, 
+    //             pointSize),
+    //         QPen(),
+    //         QBrush(Qt::black));
+    // }
+
     //plot points
     for(long unsigned int i=0; i<points.size(); i++) {
         scene.addEllipse(
             QRectF(
-                (points[i].x() * pointScale) - (0.5 * pointScale),
-                ((-points[i].y() * pointScale) - (0.5 * pointScale)), 
-                pointScale, 
-                pointScale),
+                (points[i].x() * pointScale) - (pointSize * 0.5),
+                ((-points[i].y() * pointScale) - (pointSize * 0.5)), 
+                pointSize, 
+                pointSize),
             QPen(),
             QBrush(Qt::black));
     }
