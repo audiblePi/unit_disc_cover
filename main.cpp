@@ -7,6 +7,7 @@
 #include <QGraphicsView> 
 #include <QPointF>
 
+#include <ctime>
 #include <math.h> 
 
 using namespace std;
@@ -59,9 +60,9 @@ int main(int argc, char **argv){
     int pointSize = 5;
     int which;
 
-    QApplication app(argc, argv);
-    QGraphicsScene scene;
-    QGraphicsView* view = new QGraphicsView(&scene);
+    // QApplication app(argc, argv);
+    // QGraphicsScene scene;
+    // QGraphicsView* view = new QGraphicsView(&scene);
     
     Centers obj;
     PointVector points;
@@ -70,12 +71,28 @@ int main(int argc, char **argv){
 
     which = showMenu(&obj, graphSize);
 
+
+
+    clock_t begin, end;
+    double elapsed_secs;
+        
+    begin = clock();
+
     if (which == 1){
         obj.init();
         obj.findDiscCenters();
     } else if (which == 2) {
         obj.findDiscCentersGreedy();
     }
+
+    end = clock();
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    cout << "Time taken: " << elapsed_secs << endl;
+    cout << "CLOCKS_PER_SEC: " << CLOCKS_PER_SEC << endl;
+
+
+
+
 
     //obj.showPoints();
     //obj.generateUnitDiscBucket(graphSize);
@@ -86,29 +103,33 @@ int main(int argc, char **argv){
     unitDiscs = obj.getUnitDiscs();
     //unitDiscBucket = obj.getUnitDiscBucket();
 
+
+
+
     
+    cout << "Number of disks placed: " << unitDiscs.size() << endl;
 
 
 
 
 
     //draw graph
-    scene.setSceneRect(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale);
-    scene.addRect(QRectF(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale));
+    // scene.setSceneRect(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale);
+    // scene.addRect(QRectF(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale));
     
-    for(int i=-graphSize; i<=graphSize; i++) {
-        scene.addLine(
-            QLineF(-graphSize * pointScale, i * pointScale, graphSize * pointScale, i * pointScale),
-            QPen(Qt::gray));
-    }
+    // for(int i=-graphSize; i<=graphSize; i++) {
+    //     scene.addLine(
+    //         QLineF(-graphSize * pointScale, i * pointScale, graphSize * pointScale, i * pointScale),
+    //         QPen(Qt::gray));
+    // }
 
-    for(int i=-graphSize; i<=graphSize; i++) {
-        scene.addLine(
-            QLineF(i * pointScale, -graphSize * pointScale, i * pointScale, graphSize * pointScale),
-            QPen(Qt::gray));
-    }
-    scene.addLine(QLineF(-graphSize * pointScale, 0 * pointScale, graphSize * pointScale, 0 * pointScale));
-    scene.addLine(QLineF(0 * pointScale, -graphSize * pointScale, 0 * pointScale, graphSize * pointScale));
+    // for(int i=-graphSize; i<=graphSize; i++) {
+    //     scene.addLine(
+    //         QLineF(i * pointScale, -graphSize * pointScale, i * pointScale, graphSize * pointScale),
+    //         QPen(Qt::gray));
+    // }
+    // scene.addLine(QLineF(-graphSize * pointScale, 0 * pointScale, graphSize * pointScale, 0 * pointScale));
+    // scene.addLine(QLineF(0 * pointScale, -graphSize * pointScale, 0 * pointScale, graphSize * pointScale));
 
 
 
@@ -138,28 +159,36 @@ int main(int argc, char **argv){
     //         QBrush(Qt::black));
     // }
 
+
+
+
+
+
+
+
     //plot points
-    for(long unsigned int i=0; i<points.size(); i++) {
-        scene.addEllipse(
-            QRectF(
-                (points[i].x() * pointScale) - (pointSize * 0.5),
-                ((-points[i].y() * pointScale) - (pointSize * 0.5)), 
-                pointSize, 
-                pointSize),
-            QPen(),
-            QBrush(Qt::black));
-    }
+    // for(long unsigned int i=0; i<points.size(); i++) {
+    //     scene.addEllipse(
+    //         QRectF(
+    //             (points[i].x() * pointScale) - (pointSize * 0.5),
+    //             ((-points[i].y() * pointScale) - (pointSize * 0.5)), 
+    //             pointSize, 
+    //             pointSize),
+    //         QPen(),
+    //         QBrush(Qt::black));
+    // }
 
-    //plot unit circles
-    for(long unsigned int i=0; i<unitDiscs.size(); i++) {
-        scene.addEllipse(QRectF(
-            (unitDiscs[i].center().x() * pointScale) - (unitSize * pointScale),
-            ((-unitDiscs[i].center().y() * pointScale) - (unitSize * pointScale)), 
-            (unitSize * pointScale) * 2, 
-            (unitSize * pointScale) * 2));
-    }
+    // //plot unit circles
+    // for(long unsigned int i=0; i<unitDiscs.size(); i++) {
+    //     scene.addEllipse(QRectF(
+    //         (unitDiscs[i].center().x() * pointScale) - (unitSize * pointScale),
+    //         ((-unitDiscs[i].center().y() * pointScale) - (unitSize * pointScale)), 
+    //         (unitSize * pointScale) * 2, 
+    //         (unitSize * pointScale) * 2));
+    // }
 
-    view->show();
+    //view->show();
 
-    return app.exec();
+    //return app.exec();
+    return 1;
 }

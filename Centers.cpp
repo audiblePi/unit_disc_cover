@@ -100,6 +100,7 @@ void Centers::findDiscCentersGreedy(){
         //cout << " Testing Point[" << i << "] " 
         //    << points[i].x() << ", " << points[i].y() << endl;
 
+        
         int x_floor = floor(points[i].x());
         int x_ceil = ceil(points[i].x());
         int y_floor = floor(points[i].y());
@@ -128,12 +129,12 @@ void Centers::findDiscCentersGreedy(){
         Circle testDisc1(testDiscCenter1, unitSize, CGAL::COUNTERCLOCKWISE);
         Circle testDisc2(testDiscCenter2, unitSize, CGAL::COUNTERCLOCKWISE);
 
-        if (!testDisc1.has_on_unbounded_side(points[i]) && !testDisc2.has_on_unbounded_side(points[i])){
+        if (!testDisc1.has_on_unbounded_side(points[i])) {
             unitDiscs.push_back(testDisc1);
+        } else if (!testDisc2.has_on_unbounded_side(points[i])) {
             unitDiscs.push_back(testDisc2);
-        } else if (!testDisc1.has_on_unbounded_side(points[i])){
+        } else if (!testDisc1.has_on_unbounded_side(points[i]) && !testDisc2.has_on_unbounded_side(points[i])){
             unitDiscs.push_back(testDisc1);
-        } else {
             unitDiscs.push_back(testDisc2);
         }
     }
