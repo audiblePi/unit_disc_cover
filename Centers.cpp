@@ -1,5 +1,23 @@
 #include <Centers.h>
 
+bool ltCircle::operator()(const Circle &c1, const Circle &c2) {
+    if (c1.center().x() == c2.center().x()) {
+        return c1.center().y() < c2.center().y();
+    }
+    else {
+        return c1.center().x() < c2.center().x();
+    }
+}
+
+bool Centers::compare(const Circle &c1, const Circle &c2){
+    if (c1.center().x() == c2.center().x()) {
+        return c1.center().y() < c2.center().y();
+    }
+    else {
+        return c1.center().x() < c2.center().x();
+    }
+}
+
 void Centers::generateRandomPoints(int num, int graphSize){
     points.reserve(num);
     Random_points_in_square_2<Point,Creator> g(graphSize);
@@ -39,9 +57,26 @@ void Centers::init(){
     addUnitDisc(points[0]);
 }
 
+void Centers::clear(){
+    unitDiscs.clear();
+}
+
+void Centers::addUnitDisc2(Circle circle){    
+    if( std::binary_search( unitDiscSet.begin(), unitDiscSet.end(), circle, ltCircle() )) {
+   
+    } else {
+        unitDiscSet.insert(circle);
+    }
+}
+
 void Centers::addUnitDisc(Point center){
     Circle unitDisc(center, unitSize, CGAL::COUNTERCLOCKWISE);
-    unitDiscs.push_back(unitDisc);
+    
+    if(std::find(unitDiscs.begin(), unitDiscs.end(), unitDisc) != unitDiscs.end()) {
+        cout << " Disc Found " << endl;
+    } else {
+        unitDiscs.push_back(unitDisc);
+    }
 }
 
 void Centers::setUnitSize(int num){
@@ -69,38 +104,32 @@ void Centers::showUnitDiscCenters(){
     }
 }
 
-void Centers::findDiscCenters(){
-    //cout << endl << " [Centers] findDiscCenters " << endl;
+CircleVector Centers::findDiscCenters(){
+    init();
+    cout << endl << " [Centers] findDiscCenters " << endl;
 
     for(long unsigned int i=0; i<points.size(); i++) {
-        //cout << " Testing Point[" << i << "] " 
-        //    << points[i].x() << ", " << points[i].y(); 
-        
         bool isNotCovered = true;
 
         for(long unsigned int j=0; j<unitDiscs.size(); j++) {
             if (!unitDiscs[j].has_on_unbounded_side(points[i])){
-                //cout << " -- is covered by  Unit Disc[" << j << "] " << endl;
                 isNotCovered = false;
                 break;
             }
         }
 
         if (isNotCovered) {
-            //cout << " -- is not covered" << endl;
             addUnitDisc(points[i]);
         }
     }
+
+    return unitDiscs;
 }
 
-void Centers::findDiscCentersGreedy(){
-    //cout << endl << " [Centers] findDiscCentersGreedy " << endl;
-
+CircleSet Centers::findDiscCentersGrid(){
+    cout << endl << " [Centers] findDiscCentersGrid " << endl;
+    
     for(long unsigned int i=0; i<points.size(); i++) {
-        //cout << " Testing Point[" << i << "] " 
-        //    << points[i].x() << ", " << points[i].y() << endl;
-
-        
         int x_floor = floor(points[i].x());
         int x_ceil = ceil(points[i].x());
         int y_floor = floor(points[i].y());
@@ -130,14 +159,21 @@ void Centers::findDiscCentersGreedy(){
         Circle testDisc2(testDiscCenter2, unitSize, CGAL::COUNTERCLOCKWISE);
 
         if (!testDisc1.has_on_unbounded_side(points[i])) {
-            unitDiscs.push_back(testDisc1);
+            //unitDiscs.push_back(testDisc1);
+            addUnitDisc2(testDisc1);
         } else if (!testDisc2.has_on_unbounded_side(points[i])) {
-            unitDiscs.push_back(testDisc2);
-        } else if (!testDisc1.has_on_unbounded_side(points[i]) && !testDisc2.has_on_unbounded_side(points[i])){
-            unitDiscs.push_back(testDisc1);
-            unitDiscs.push_back(testDisc2);
-        }
+            //unitDiscs.push_back(testDisc2);
+            addUnitDisc2(testDisc2);
+        } 
+        // else if (!testDisc1.has_on_unbounded_side(points[i]) && !testDisc2.has_on_unbounded_side(points[i])){
+        //     //unitDiscs.push_back(testDisc1);
+        //     //unitDiscs.push_back(testDisc2);
+        //     addUnitDisc2(testDisc1);
+        //     addUnitDisc2(testDisc2);
+        // }
     }
+
+    return unitDiscSet;
 }
 
 PointVector Centers::getPoints(){
@@ -151,6 +187,29 @@ CircleVector Centers::getUnitDiscs(){
 CircleVector Centers::getUnitDiscBucket(){
     return unitDiscBucket;
 }
+
+PointVector Centers::getUnitDiscCenters(){
+    PointVector unitDiscCenters;
+    unitDiscCenters.reserve(unitDiscs.size()+1);
+    
+    for(long unsigned int i=0; i<unitDiscs.size(); i++) {
+        Point p(unitDiscs[i].center().x(), unitDiscs[i].center().y());
+        unitDiscCenters.push_back(p);
+    }
+    return unitDiscCenters;
+}
+
+PointVector Centers::getUnitDiscCentersGrid(){
+    PointVector unitDiscCentersGrid;
+    unitDiscCentersGrid.reserve(unitDiscSet.size()+1);
+
+    for (auto elem : unitDiscSet){
+        Point p(elem.center().x(), elem.center().y());
+        unitDiscCentersGrid.push_back(p);
+    }
+    return unitDiscCentersGrid;
+}
+
 
 int Centers::getUnitSize(){
     return unitSize;

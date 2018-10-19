@@ -1,5 +1,6 @@
 //Unit Disk Cover - Brute Force
 #include <Centers.h>
+#include <UnitDiskCoverPrinter.h>
 
 #include <QtGui>
 #include <QApplication> 
@@ -12,8 +13,8 @@
 
 using namespace std;
 
-int showMenu(Centers* obj, int graphSize){
-    int menuChoice, sampleSize, unitSize;
+void showMenu(Centers* obj, int graphSize){
+    int menuChoice, sampleSize;
 
     cout << endl;
     cout << " Unit Disk Covers - Brute Force " << endl;
@@ -35,160 +36,52 @@ int showMenu(Centers* obj, int graphSize){
             break;            
         case 3 : 
         default :
-            return 0;
+            return;
     }
 
-    cout << endl << " Size of a unit? : ";
-    cin >> unitSize;
+    // cout << endl << " Size of a unit? : ";
+    // cin >> unitSize;
     
-    obj->setUnitSize(unitSize * unitSize);
-
-    cout << endl;
-    cout << " Choose " << endl;
-    cout << " 1. Brute Force " << endl;
-    cout << " 2. Greedy" << endl;
-    cout << " Enter your choice : ";
-    cin >> menuChoice;
-
-   return menuChoice;
+    obj->setUnitSize(1);
 }
 
 int main(int argc, char **argv){
-    double unitSize;
     int graphSize = 10;
-    int pointScale = 30;
-    int pointSize = 5;
-    int which;
-
-    // QApplication app(argc, argv);
-    // QGraphicsScene scene;
-    // QGraphicsView* view = new QGraphicsView(&scene);
-    
-    Centers obj;
-    PointVector points;
-    CircleVector unitDiscs;
-    //CircleVector unitDiscBucket;
-
-    which = showMenu(&obj, graphSize);
-
-
-
     clock_t begin, end;
     double elapsed_secs;
-        
+
+    Centers obj;
+    PointVector points;
+    PointVector unitDiscCentersPoints;
+    PointVector unitDiscCentersGridPoints;
+    CircleVector unitDiscsCenters;
+    CircleSet unitDiscsGrid;
+
+    showMenu(&obj, graphSize);
+
+    points = obj.getPoints();
+
     begin = clock();
-
-    if (which == 1){
-        obj.init();
-        obj.findDiscCenters();
-    } else if (which == 2) {
-        obj.findDiscCentersGreedy();
-    }
-
+    unitDiscsCenters = obj.findDiscCenters();
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    cout << "Time taken: " << elapsed_secs << endl;
-    cout << "CLOCKS_PER_SEC: " << CLOCKS_PER_SEC << endl;
+    cout << " Time taken: " << elapsed_secs << endl;
+    cout << " Number of disks placed: " << unitDiscsCenters.size() << endl;
 
+    unitDiscCentersPoints = obj.getUnitDiscCenters();
+    // UnitDiskCoverPrinter newPrinter1(points, unitDiscCentersPoints, 1.0, "testoutput1");
+    // newPrinter1.displayPDF();
 
+    obj.clear();
+    begin = clock();
+    unitDiscsGrid = obj.findDiscCentersGrid();
+    end = clock();
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    cout << " Time taken: " << elapsed_secs << endl;
+    cout << " Number of disks placed: " << unitDiscsGrid.size() << endl;
+    unitDiscCentersGridPoints = obj.getUnitDiscCentersGrid();
+    // UnitDiskCoverPrinter newPrinter2(points, unitDiscCentersGridPoints, 1, "test_output2");
+    // newPrinter2.displayPDF();
 
-
-
-    //obj.showPoints();
-    //obj.generateUnitDiscBucket(graphSize);
-    //obj.showUnitDiscCenters();
-
-    unitSize = sqrt( (double) obj.getUnitSize() );
-    points = obj.getPoints();
-    unitDiscs = obj.getUnitDiscs();
-    //unitDiscBucket = obj.getUnitDiscBucket();
-
-
-
-
-    
-    cout << "Number of disks placed: " << unitDiscs.size() << endl;
-
-
-
-
-
-    //draw graph
-    // scene.setSceneRect(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale);
-    // scene.addRect(QRectF(-graphSize * pointScale, -graphSize * pointScale, graphSize * 2 * pointScale, graphSize * 2 * pointScale));
-    
-    // for(int i=-graphSize; i<=graphSize; i++) {
-    //     scene.addLine(
-    //         QLineF(-graphSize * pointScale, i * pointScale, graphSize * pointScale, i * pointScale),
-    //         QPen(Qt::gray));
-    // }
-
-    // for(int i=-graphSize; i<=graphSize; i++) {
-    //     scene.addLine(
-    //         QLineF(i * pointScale, -graphSize * pointScale, i * pointScale, graphSize * pointScale),
-    //         QPen(Qt::gray));
-    // }
-    // scene.addLine(QLineF(-graphSize * pointScale, 0 * pointScale, graphSize * pointScale, 0 * pointScale));
-    // scene.addLine(QLineF(0 * pointScale, -graphSize * pointScale, 0 * pointScale, graphSize * pointScale));
-
-
-
-
-
-
-
-
-    //plot unitDiscBucket
-    // for(long unsigned int i=0; i<unitDiscBucket.size(); i++) {
-    //     scene.addEllipse(QRectF(
-    //         (unitDiscBucket[i].center().x() * pointScale) - (unitSize * pointScale),
-    //         ((-unitDiscBucket[i].center().y() * pointScale) - (unitSize * pointScale)), 
-    //         (unitSize * pointScale) * 2, 
-    //         (unitSize * pointScale) * 2));
-    // }
-
-    //plot unitDiscBucketCenters
-    // for(long unsigned int i=0; i<unitDiscBucket.size(); i++) {
-    //     scene.addEllipse(
-    //         QRectF(
-    //             (unitDiscBucket[i].center().x() * pointScale) - (pointSize * 0.5),
-    //             ((-unitDiscBucket[i].center().y() * pointScale) - (pointSize * 0.5)), 
-    //             pointSize, 
-    //             pointSize),
-    //         QPen(),
-    //         QBrush(Qt::black));
-    // }
-
-
-
-
-
-
-
-
-    //plot points
-    // for(long unsigned int i=0; i<points.size(); i++) {
-    //     scene.addEllipse(
-    //         QRectF(
-    //             (points[i].x() * pointScale) - (pointSize * 0.5),
-    //             ((-points[i].y() * pointScale) - (pointSize * 0.5)), 
-    //             pointSize, 
-    //             pointSize),
-    //         QPen(),
-    //         QBrush(Qt::black));
-    // }
-
-    // //plot unit circles
-    // for(long unsigned int i=0; i<unitDiscs.size(); i++) {
-    //     scene.addEllipse(QRectF(
-    //         (unitDiscs[i].center().x() * pointScale) - (unitSize * pointScale),
-    //         ((-unitDiscs[i].center().y() * pointScale) - (unitSize * pointScale)), 
-    //         (unitSize * pointScale) * 2, 
-    //         (unitSize * pointScale) * 2));
-    // }
-
-    //view->show();
-
-    //return app.exec();
     return 1;
 }

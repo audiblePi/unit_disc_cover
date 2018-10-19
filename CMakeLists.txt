@@ -39,7 +39,7 @@ endif()
 # Creating entries for target: executable
 # ############################
 
-add_executable( executable  Centers.cpp main.cpp )
+add_executable( executable  Centers.cpp main.cpp UnitDiskCoverPrinter.cpp)
 
 add_to_cached_list( CGAL_EXECUTABLE_TARGETS executable )
 

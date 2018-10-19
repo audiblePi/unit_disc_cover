@@ -525,6 +525,33 @@ Centers.cpp.s:
 	$(MAKE) -f CMakeFiles/executable.dir/build.make CMakeFiles/executable.dir/Centers.cpp.s
 .PHONY : Centers.cpp.s
 
+UnitDiskCoverPrinter.o: UnitDiskCoverPrinter.cpp.o
+
+.PHONY : UnitDiskCoverPrinter.o
+
+# target to build an object file
+UnitDiskCoverPrinter.cpp.o:
+	$(MAKE) -f CMakeFiles/executable.dir/build.make CMakeFiles/executable.dir/UnitDiskCoverPrinter.cpp.o
+.PHONY : UnitDiskCoverPrinter.cpp.o
+
+UnitDiskCoverPrinter.i: UnitDiskCoverPrinter.cpp.i
+
+.PHONY : UnitDiskCoverPrinter.i
+
+# target to preprocess a source file
+UnitDiskCoverPrinter.cpp.i:
+	$(MAKE) -f CMakeFiles/executable.dir/build.make CMakeFiles/executable.dir/UnitDiskCoverPrinter.cpp.i
+.PHONY : UnitDiskCoverPrinter.cpp.i
+
+UnitDiskCoverPrinter.s: UnitDiskCoverPrinter.cpp.s
+
+.PHONY : UnitDiskCoverPrinter.s
+
+# target to generate assembly for a file
+UnitDiskCoverPrinter.cpp.s:
+	$(MAKE) -f CMakeFiles/executable.dir/build.make CMakeFiles/executable.dir/UnitDiskCoverPrinter.cpp.s
+.PHONY : UnitDiskCoverPrinter.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -593,6 +620,9 @@ help:
 	@echo "... Centers.o"
 	@echo "... Centers.i"
 	@echo "... Centers.s"
+	@echo "... UnitDiskCoverPrinter.o"
+	@echo "... UnitDiskCoverPrinter.i"
+	@echo "... UnitDiskCoverPrinter.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
