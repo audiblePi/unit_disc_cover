@@ -132,3 +132,58 @@
 	"LinesAlgorithm.h"
 	"CgalComponents.h"
 
+1542830613 source:/home/ronald/unit_disc_cover/UnitDiskCover/main.cpp
+	"UnitDiskCoverPrinter.h"
+	"UnitDiskCoverCenters.h"
+	"UnitDiskCoverUnitGrid.h"
+	"BiniazEtAls.h"
+	"LinesAlgorithm.h"
+	"CgalComponents.h"
+
+1538705036 /home/ronald/unit_disc_cover/UnitDiskCover/include/UnitDiskCoverPrinter.h
+	"CgalComponents.h"
+	<vector>
+
+1542755512 /home/ronald/unit_disc_cover/UnitDiskCover/include/CgalComponents.h
+	<vector>
+	<algorithm>
+	<ctime>
+	<unordered_set>
+	<CGAL/point_generators_2.h>
+	<CGAL/algorithm.h>
+	<CGAL/random_selection.h>
+	<CGAL/Exact_predicates_inexact_constructions_kernel.h>
+	<CGAL/Delaunay_triangulation_2.h>
+
+1538855375 /home/ronald/unit_disc_cover/UnitDiskCover/include/UnitDiskCoverCenters.h
+	"CgalComponents.h"
+
+1538707648 /home/ronald/unit_disc_cover/UnitDiskCover/include/UnitDiskCoverUnitGrid.h
+	"CgalComponents.h"
+
+1542662304 /home/ronald/unit_disc_cover/UnitDiskCover/include/BiniazEtAls.h
+	"CgalComponents.h"
+
+1542662272 /home/ronald/unit_disc_cover/UnitDiskCover/include/LinesAlgorithm.h
+	"CgalComponents.h"
+
+1540567743 source:/home/ronald/unit_disc_cover/UnitDiskCover/src/BiniazEtAls.cpp
+	"BiniazEtAls.h"
+	"CgalComponents.h"
+
+1540566633 source:/home/ronald/unit_disc_cover/UnitDiskCover/src/UnitDiskCoverCenters.cpp
+	"UnitDiskCoverCenters.h"
+	"CgalComponents.h"
+
+1538924328 source:/home/ronald/unit_disc_cover/UnitDiskCover/src/UnitDiskCoverPrinter.cpp
+	"UnitDiskCoverPrinter.h"
+	<iostream>
+
+1538925992 source:/home/ronald/unit_disc_cover/UnitDiskCover/src/UnitDiskCoverUnitGrid.cpp
+	"UnitDiskCoverUnitGrid.h"
+	"CgalComponents.h"
+
+1542865288 source:/home/ronald/unit_disc_cover/UnitDiskCover/src/LinesAlgorithm.cpp
+	"LinesAlgorithm.h"
+	"CgalComponents.h"
+

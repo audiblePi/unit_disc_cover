@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.21)  21 NOV 2018 15:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.21)  22 NOV 2018 01:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **output4.tex
 (./output4.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 27 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 5 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/standalone/standalone.cls
 Document Class: standalone 2015/07/15 v1.2 Class to compile TeX sub-files stand
 alone
@@ -434,15 +434,15 @@ e
 
 ] (./output4.aux) ) 
 Here is how much of TeX's memory you used:
- 11825 strings out of 494374
- 241490 string characters out of 6169221
- 315352 words of memory out of 5000000
- 15094 multiletter control sequences out of 15000+600000
+ 11837 strings out of 494880
+ 241769 string characters out of 6179600
+ 665480 words of memory out of 5000000
+ 14956 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
- 286 hyphenation exceptions out of 8191
+ 36 hyphenation exceptions out of 8191
  55i,5n,56p,388b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on output4.pdf (1 page, 10538 bytes).
+Output written on output4.pdf (1 page, 18953 bytes).
 PDF statistics:
  11 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream
