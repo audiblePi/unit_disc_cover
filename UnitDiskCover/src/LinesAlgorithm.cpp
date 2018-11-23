@@ -9,36 +9,57 @@ LinesAlgorithm::LinesAlgorithm(vector<Point> &P, vector<Point> &C) {
                                     return (pi.x() < pj.x()) || ( pi.x() == pj.x() && pi.y() < pj.y());
                             });
     bool sorted = false;
+    bool rightBegin = false;
     double root = 3;
-    double constant = -19;
-    double counter = -39;
+    double constant = -17;
+    double counter = -35;
     int index = 0;
+    int length = P.size();
+    while(rightBegin == false){
+        if(P.front().x() > constant*sqrt(root)){
+            constant++;
+            counter += 2;
+        }else{
+            rightBegin = true;
+        }
+    }
     while(sorted == false){
-        for(Point p: P){
-            index++;
+        Segments.clear();
+        for(int i = index; i < length; ++i){
+            if(!(P[i].x() <= constant*sqrt(root) && P[i].x() >= (constant - 1)*sqrt(root))){
+                sort(P.begin() + index, P.begin() + i, [](const Point& pi, const Point& pj) {
+                                            return pi.y() < pj.y();
+                                    });
+                length = i;
 
-            if((p.x() <= constant*sqrt(root) && p.x() >= (constant - 1)*sqrt(root))){
-                Point onRestrLine((counter*sqrt(root)/2), p.y());
-                double distance = sqrt(squared_distance(p, onRestrLine));
-                double pointLength = sqrt(1-pow(distance, 2));
-
-                Point topPoint(onRestrLine.x(), onRestrLine.y() + pointLength);
-                Point bottomPoint(onRestrLine.x(), onRestrLine.y() - pointLength);
-                Segment seg(topPoint, bottomPoint);
-                Segments.push_back(seg);
-                //sort(P.begin(), index, [](const Point& pi, const Point& pj) {
-                //                                return pi.y() < pj.y();
-                //                  });
             }
         }
+        for(int j = index; j < length; j++){
+            Point onRestrLine((counter*sqrt(root)/2), P[j].y());
+            double distance = sqrt(squared_distance(P[j], onRestrLine));
+            double pointLength = sqrt(1-pow(distance, 2));
+
+            Point topPoint(onRestrLine.x(), onRestrLine.y() + pointLength);
+            Point bottomPoint(onRestrLine.x(), onRestrLine.y() - pointLength);
+            Segment seg(topPoint, bottomPoint);
+            Segments.push_back(seg);
+        }
+        index = length;
+        length = P.size();
+        sort(Segments.begin(), Segments.end(), [](Segment& si, Segment& sj) {
+                                                    return si.max() < sj.max();
+                            });
         for(int i = 0; i < Segments.size(); i++){
-            if(Segments[i].min() > Segments[i+1].max()){
+            cout << Segments[i] << endl;
+            /*if(Segments[i].min() < Segments[i+1].max()){
                 C.push_back(midpoint(Segments[i].min(), Segments[i+1].max()));
-            }else{
-                C.push_back(midpoint(Segments[i].min(), Segments[i].max()));
                 i++;
-            }
+            }else{*/
+                C.push_back(midpoint(Segments[i].max(), Segments[i].min()));
+
+            //}
         }
+        cout << endl;
         constant++;
         counter += 2;
         if(constant*sqrt(root) > P.back().x()){
@@ -46,5 +67,4 @@ LinesAlgorithm::LinesAlgorithm(vector<Point> &P, vector<Point> &C) {
         }
 
     }
-    cout << Segments.size() << endl;
 }
