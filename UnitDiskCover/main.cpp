@@ -8,13 +8,13 @@
 int main() {
 
     vector<Point> points;
-    points.reserve(100);
+    points.reserve(1000);
 
     Random_points_in_square_2<Point,Creator> g1(30.0);
-    std::copy_n(g1, 50, back_inserter(points));
+    std::copy_n(g1, 500, back_inserter(points));
 
     Random_points_in_disc_2<Point,Creator> g2(30.0);
-    std::copy_n(g2, 50, back_inserter(points));
+    std::copy_n(g2, 500, back_inserter(points));
 
     cout << "Point generation completed" << endl;
 

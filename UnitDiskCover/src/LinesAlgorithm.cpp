@@ -25,7 +25,10 @@ LinesAlgorithm::LinesAlgorithm(vector<Point> &P, vector<Point> &C) {
     }
     while(sorted == false){
         Segments.clear();
-        for(int i = index; i < length; ++i){
+        if(constant*sqrt(root) >= P.back().x()){
+            sorted = true;
+        }
+        for(int i = index; i <= length; ++i){
             if(!(P[i].x() <= constant*sqrt(root) && P[i].x() >= (constant - 1)*sqrt(root))){
                 sort(P.begin() + index, P.begin() + i, [](const Point& pi, const Point& pj) {
                                             return pi.y() < pj.y();
@@ -47,24 +50,20 @@ LinesAlgorithm::LinesAlgorithm(vector<Point> &P, vector<Point> &C) {
         index = length;
         length = P.size();
         sort(Segments.begin(), Segments.end(), [](Segment& si, Segment& sj) {
-                                                    return si.max() < sj.max();
+                                                    return si.max() > sj.max();
                             });
         for(int i = 0; i < Segments.size(); i++){
-            cout << Segments[i] << endl;
-            /*if(Segments[i].min() < Segments[i+1].max()){
+            //cout << Segments[i] << endl;
+            if(Segments[i].min() < Segments[i+1].max()){
                 C.push_back(midpoint(Segments[i].min(), Segments[i+1].max()));
-                i++;
-            }else{*/
+                Segments.erase(Segments.begin() + i+1);
+            }else{
                 C.push_back(midpoint(Segments[i].max(), Segments[i].min()));
 
-            //}
+            }
         }
         cout << endl;
         constant++;
         counter += 2;
-        if(constant*sqrt(root) > P.back().x()){
-            sorted = true;
-        }
-
     }
 }
